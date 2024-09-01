@@ -1,0 +1,92 @@
+Locs-MBP.home 
+darwin 
+[
+  {
+    "model": "Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz",
+    "speed": 1400,
+    "times": {
+      "user": 9550580,
+      "nice": 0,
+      "sys": 5281960,
+      "idle": 54275410,
+      "irq": 0
+    }
+  },
+  {
+    "model": "Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz",
+    "speed": 1400,
+    "times": {
+      "user": 735220,
+      "nice": 0,
+      "sys": 565770,
+      "idle": 68063420,
+      "irq": 0
+    }
+  },
+  {
+    "model": "Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz",
+    "speed": 1400,
+    "times": {
+      "user": 8581220,
+      "nice": 0,
+      "sys": 3906770,
+      "idle": 56644020,
+      "irq": 0
+    }
+  },
+  {
+    "model": "Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz",
+    "speed": 1400,
+    "times": {
+      "user": 738890,
+      "nice": 0,
+      "sys": 546270,
+      "idle": 68083390,
+      "irq": 0
+    }
+  },
+  {
+    "model": "Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz",
+    "speed": 1400,
+    "times": {
+      "user": 7504230,
+      "nice": 0,
+      "sys": 3166960,
+      "idle": 58510130,
+      "irq": 0
+    }
+  },
+  {
+    "model": "Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz",
+    "speed": 1400,
+    "times": {
+      "user": 750210,
+      "nice": 0,
+      "sys": 528840,
+      "idle": 68094410,
+      "irq": 0
+    }
+  },
+  {
+    "model": "Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz",
+    "speed": 1400,
+    "times": {
+      "user": 6653690,
+      "nice": 0,
+      "sys": 2692610,
+      "idle": 59874580,
+      "irq": 0
+    }
+  },
+  {
+    "model": "Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz",
+    "speed": 1400,
+    "times": {
+      "user": 773070,
+      "nice": 0,
+      "sys": 515230,
+      "idle": 68089230,
+      "irq": 0
+    }
+  }
+]
