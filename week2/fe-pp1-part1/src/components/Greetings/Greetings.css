@@ -1,0 +1,6 @@
+.greet-container {
+    border: solid 2px black;
+    margin-bottom: 10px;
+    padding: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+}

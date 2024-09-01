@@ -1,0 +1,21 @@
+.id_card {
+  display: flex;
+  padding: 5px;
+  margin-bottom: 5px;
+  border: solid 1px black;
+}
+
+.profile-info {
+  padding: 0 0 0 5px;
+  font-size: 0.7rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.bold-field {
+  font-weight: bold;
+}
+  
+
+p {
+  margin: 0;
+}
