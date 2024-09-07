@@ -1,0 +1,20 @@
+{
+  "name": "be-pp",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "node feedbackLib.js",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
