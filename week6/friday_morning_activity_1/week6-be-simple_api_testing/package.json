@@ -1,0 +1,23 @@
+{
+  "name": "supertest_api_testing",
+  "version": "1.0.0",
+  "description": "",
+  "type":"module",
+  "main": "index.js",
+  "scripts": {
+    "test1": "mocha airports.test.js",
+    "test2": "mocha favorites.test.js",
+    "test": "mocha *.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "overrides": {
+    "glob": "10.4.2"
+  },
+  "devDependencies": {
+    "chai": "^5.1.1",
+    "mocha": "^10.7.3",
+    "supertest": "^7.0.0"
+  }
+}
