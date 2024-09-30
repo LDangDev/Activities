@@ -1,9 +1,36 @@
+import { useEffect, useState } from "react";
 import JobListings from "../components/JobListings";
 
 const Home = () => {
+  const [jobs, setJobs] = useState(null);
+  const [isPending, setIsPending] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const res = await fetch("api/jobs");
+        if (!res.ok) {
+          throw new Error("could not fetch the data for that resource");
+        }
+        const data = await res.json();
+        setIsPending(false);
+        setJobs(data);
+        setError(null);
+      } catch (err) {
+        setIsPending(false);
+        setError(err.message);
+      }
+    };
+    setTimeout(() => {fetchJobs();}, 1000); // Delay of 1 second
+    // fetchJobs();
+  }, []);
+
   return (
     <div className="home">
-      <JobListings  />
+      {error && <div>{error}</div>}
+      {isPending && <div>Loading...</div>}
+      {jobs && <JobListings jobs={jobs} />}
     </div>
   );
 };
