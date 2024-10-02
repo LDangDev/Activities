@@ -1,0 +1,19 @@
+.button-light {
+  background: #fff;
+  color: #222;
+}
+
+.button-dark {
+  background: #222;
+  color: #fff;
+}
+
+.panel-light {
+  background: #f0f0f0;
+  color: #000;
+}
+
+.panel-dark {
+  background: #333;
+  color: #fff;
+}
