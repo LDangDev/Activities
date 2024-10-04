@@ -1,0 +1,325 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Workouts API",
+      "contact": {},
+      "version": "1.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:4000/api",
+        "variables": {}
+      }
+    ],
+    "paths": {
+      "/user/signup": {
+        "post": {
+          "tags": [
+            "Auth"
+          ],
+          "summary": "Register User",
+          "operationId": "RegisterUser",
+          "parameters": [],
+          "requestBody": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegisterUserRequest"
+                },
+                "example": {
+                  "name": "bob",
+                  "email": "bob@gmail.com",
+                  "password": "4wa95#Cf-"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false,
+          "security": []
+        }
+      },
+      "/user/login": {
+        "post": {
+          "tags": [
+            "Auth"
+          ],
+          "summary": "Login User",
+          "operationId": "LoginUser",
+          "parameters": [],
+          "requestBody": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginUserRequest"
+                },
+                "example": {
+                  "email": "susan@gmail.com",
+                  "password": "secret"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false,
+          "security": []
+        }
+      },
+      "/workouts": {
+        "post": {
+          "tags": [
+            "Workouts"
+          ],
+          "summary": "Create Workout",
+          "operationId": "CreateWorkout",
+          "parameters": [],
+          "requestBody": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateWorkoutRequest"
+                },
+                "example": {
+                  "title": "Sample Workout",
+                  "reps": 10,
+                  "load": 50
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        },
+        "get": {
+          "tags": [
+            "Workouts"
+          ],
+          "summary": "Get All Workouts",
+          "operationId": "GetAllWorkouts",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/workouts/{id}": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "The Workout ID"
+          }
+        ],
+        "get": {
+          "tags": [
+            "Workouts"
+          ],
+          "summary": "Get Single Workout",
+          "operationId": "GetSingleWorkout",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        },
+        "patch": {
+          "tags": [
+            "Workouts"
+          ],
+          "summary": "Update Workout",
+          "operationId": "UpdateWorkout",
+          "parameters": [],
+          "requestBody": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateWorkoutRequest"
+                },
+                "example": {
+                  "title": "Random Workout",
+                  "reps": 1,
+                  "load": 5
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        },
+        "delete": {
+          "tags": [
+            "Workouts"
+          ],
+          "summary": "Delete Workout",
+          "operationId": "DeleteWorkout",
+          "parameters": [],
+          "responses": {
+            "204": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "RegisterUserRequest": {
+          "title": "RegisterUserRequest",
+          "required": [
+            "name",
+            "email",
+            "password"
+          ],
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            }
+          },
+          "example": {
+            "name": "bob",
+            "email": "bob@gmail.com",
+            "password": "4wa95#Cf-"
+          }
+        },
+        "LoginUserRequest": {
+          "title": "LoginUserRequest",
+          "required": [
+            "email",
+            "password"
+          ],
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            }
+          },
+          "example": {
+            "email": "bob@gmail.com",
+            "password": "4wa95#Cf-"
+          }
+        },
+        "CreateWorkoutRequest": {
+          "title": "CreateWorkoutRequest",
+          "required": [
+            "title",
+            "reps",
+            "load"
+          ],
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "reps": {
+              "type": "integer"
+            },
+            "load": {
+              "type": "integer"
+            }
+          },
+          "example": {
+            "tille": "Push ups",
+            "reps": 40,
+            "load": 5
+          }
+        },
+        "UpdateWorkoutRequest": {
+          "title": "UpdateWorkoutRequest",
+          "required": [
+            "tille",
+            "reps",
+            "load"
+          ],
+          "type": "object",
+          "properties": {
+            "tille": {
+              "type": "string"
+            },
+            "reps": {
+              "type": "integer"
+            },
+            "load": {
+              "type": "integer"
+            }
+          },
+          "example": {
+            "tille": "random",
+            "reps": 4,
+            "load": 25
+          }
+        }
+      },
+      "securitySchemes": {
+        "httpBearer": {
+          "type": "http",
+          "scheme": "bearer"
+        }
+      }
+    },
+    "security": [
+      {
+        "httpBearer": []
+      }
+    ],
+    "tags": [
+      {
+        "name": "Auth",
+        "description": ""
+      },
+      {
+        "name": "Workouts",
+        "description": ""
+      }
+    ]
+  }
