@@ -1,40 +1,45 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 const EditJobPage = () => {
-  const [job, setJob] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [job, setJob] = useState(null); // Initialize job state
+  const [loading, setLoading] = useState(true); // Loading state
+  const [error, setError] = useState(null); // Error state
   const { id } = useParams();
-  const navigate = useNavigate(); // Import and use useNavigate
 
+  // Declare state variables for form fields
   const [title, setTitle] = useState("");
   const [type, setType] = useState("");
   const [description, setDescription] = useState("");
   const [companyName, setCompanyName] = useState("");
-  const [companyEmail, setCompanyEmail] = useState("");
-  const [companyPhone, setCompanyPhone] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+  const [contactPhone, setContactPhone] = useState("");
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = user ? user.token : null;
+
+  const navigate = useNavigate();
 
   const updateJob = async (job) => {
     try {
+      console.log("Updating job:", job);
       const res = await fetch(`/api/jobs/${job.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(job),
       });
-
-      if (!res.ok) {
-        throw new Error("Fail to update job");
-      }
+      if (!res.ok) throw new Error("Failed to update job");
       return res.ok;
-    } catch (err) {
-      console.error("Error updating job: ", err);
+    } catch (error) {
+      console.error("Error updating job:", error);
       return false;
     }
   };
 
+  // Fetch job data
   useEffect(() => {
     const fetchJob = async () => {
       try {
@@ -43,20 +48,20 @@ const EditJobPage = () => {
           throw new Error("Network response was not ok");
         }
         const data = await res.json();
-        setJob(data);
+        setJob(data); // Set the job data
 
-        // Initialize form fields
+        // Initialize form fields with fetched job data
         setTitle(data.title);
         setType(data.type);
         setDescription(data.description);
         setCompanyName(data.company.name);
-        setCompanyEmail(data.company.contactEmail);
-        setCompanyPhone(data.company.contactPhone);
-      } catch (err) {
-        console.error("Failed to fetch job", err); // Corrected here
-        setError(err.message);
+        setContactEmail(data.company.contactEmail);
+        setContactPhone(data.company.contactPhone);
+      } catch (error) {
+        console.error("Failed to fetch job:", error);
+        setError(error.message);
       } finally {
-        setLoading(false);
+        setLoading(false); // Stop loading after fetch
       }
     };
 
@@ -74,17 +79,17 @@ const EditJobPage = () => {
       description,
       company: {
         name: companyName,
-        contactEmail: companyEmail, // Fixed here
-        contactPhone: companyPhone,   // Fixed here
+        contactEmail,
+        contactPhone,
       },
     };
 
     const success = await updateJob(updatedJob);
     if (success) {
-      // toast.success("Job Updated Successfully"); // Uncomment if using toast
+      console.log("Job Updated Successfully");
       navigate(`/jobs/${id}`);
     } else {
-      // toast.error("Failed to update the job"); // Uncomment if using toast
+      console.error("Failed to update the job");
     }
   };
 
@@ -101,7 +106,7 @@ const EditJobPage = () => {
           <input
             type="text"
             required
-            value={title} // Use title state here
+            value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
           <label>Job type:</label>
@@ -127,19 +132,19 @@ const EditJobPage = () => {
           />
           <label>Contact Email:</label>
           <input
-            type="email" // Consider using type email for validation
+            type="text"
             required
-            value={companyEmail} // Fixed here
-            onChange={(e) => setCompanyEmail(e.target.value)} // Fixed here
+            value={contactEmail}
+            onChange={(e) => setContactEmail(e.target.value)}
           />
           <label>Contact Phone:</label>
           <input
             type="text"
             required
-            value={companyPhone} // Fixed here
-            onChange={(e) => setCompanyPhone(e.target.value)} // Fixed here
+            value={contactPhone}
+            onChange={(e) => setContactPhone(e.target.value)}
           />
-          <button type="submit">Update Job</button>
+          <button>Update Job</button>
         </form>
       )}
     </div>

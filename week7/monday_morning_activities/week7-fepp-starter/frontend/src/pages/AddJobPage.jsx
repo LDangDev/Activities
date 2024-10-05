@@ -1,54 +1,61 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useField from "../hooks/useField";
 
 const AddJobPage = () => {
-  const jobTitle = useField("text");
+  const [title, setTitle] = useState("");
   const [type, setType] = useState("Full-Time");
-  const jobDescription = useField("text");
-  const companyName = useField("text");
-  const companyEmail = useField("text");
-  const companyPhone = useField("text");
+  const [description, setDescription] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+  const [contactPhone, setContactPhone] = useState("");
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = user ? user.token : null;
 
   const navigate = useNavigate();
 
   const addJob = async (newJob) => {
     try {
-      const res = await fetch("api/jobs", {
+      console.log("Adding job:", newJob);
+      const res = await fetch("/api/jobs", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(newJob),
       });
       if (!res.ok) {
-        throw new Error("Fail to add job");
+        throw new Error("Failed to add job");
       }
+      return true;
     } catch (error) {
-      console.log(error);
+      console.error("Error adding job:", error);
       return false;
     }
-    return true;
   };
 
-  const submitForm = (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
-    console.log("submitForm called");
 
     const newJob = {
-      title: jobTitle.value,
+      title,
       type,
-      description: jobDescription.value,
+      description,
       company: {
-        name: companyName.value,
-        contactEmail: companyEmail.value,
-        contactPhone: companyPhone.value,
+        name: companyName,
+        contactEmail,
+        contactPhone,
       },
     };
-    console.log(newJob);
-    addJob(newJob);
-    navigate("/");
 
+    const success = await addJob(newJob);
+    if (success) {
+      console.log("Job Added Successfully");
+      navigate("/");
+    } else {
+      console.error("Failed to add the job");
+    }
   };
 
   return (
@@ -56,7 +63,12 @@ const AddJobPage = () => {
       <h2>Add a New Job</h2>
       <form onSubmit={submitForm}>
         <label>Job title:</label>
-        <input {...jobTitle} />
+        <input
+          type="text"
+          required
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
         <label>Job type:</label>
         <select value={type} onChange={(e) => setType(e.target.value)}>
           <option value="Full-Time">Full-Time</option>
@@ -66,14 +78,33 @@ const AddJobPage = () => {
         </select>
 
         <label>Job Description:</label>
-        <textarea {...jobDescription}></textarea>
+        <textarea
+          required
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        ></textarea>
         <label>Company Name:</label>
-        <input {...companyName} />
+        <input
+          type="text"
+          required
+          value={companyName}
+          onChange={(e) => setCompanyName(e.target.value)}
+        />
         <label>Contact Email:</label>
-        <input {...companyEmail} />
+        <input
+          type="email"
+          required
+          value={contactEmail}
+          onChange={(e) => setContactEmail(e.target.value)}
+        />
         <label>Contact Phone:</label>
-        <input {...companyPhone} />
-        <button>Add Job</button>
+        <input
+          type="tel"
+          required
+          value={contactPhone}
+          onChange={(e) => setContactPhone(e.target.value)}
+        />
+        <button type="submit">Add Job</button>
       </form>
     </div>
   );
